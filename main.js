@@ -1,23 +1,19 @@
 // Based on ThiefMaster's code from StackOverflow
 // http://stackoverflow.com/a/10574546/843854
-//
-// @param: string or buffer that may have a JSON object
-// @return: an array [object, start index, end index]
-//
-// Throws an error if no object is found
 
-module.exports = function extractJSON(str) {
-    var firstOpen, firstClose, candidate, result;
+module.exports = function extractJSON(input, callback) {
+    var firstOpen, firstClose, candidate, result,
+        str = input.toString().trim(),
+        error = new Error("No JSON object found");
 
-    str = str.toString().trim();
     firstOpen = str.indexOf('{', firstOpen + 1);
 
     do {
         firstClose = str.lastIndexOf('}');
 
-        // Terminal condition
+        // Terminal condition, nothing found
         if (firstClose <= firstOpen) {
-            throw new Error("No JSON object found");
+            callback(error, input);
         }
 
         do {
@@ -25,7 +21,7 @@ module.exports = function extractJSON(str) {
 
             try {
                 result = JSON.parse(candidate);
-                return [result, firstOpen, firstClose + 1];
+                callback(null, [result, firstOpen, firstClose + 1]);
             } catch (e) {
                 // Do nothing
             }
