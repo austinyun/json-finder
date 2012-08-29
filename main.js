@@ -1,5 +1,6 @@
 // Based on ThiefMaster's code from StackOverflow
 // http://stackoverflow.com/a/10574546/843854
+// @return: error, the JSON object, start index, end index
 
 module.exports = function(input, callback) {
     var firstOpen, firstClose, candidate, result,
@@ -21,7 +22,7 @@ module.exports = function(input, callback) {
 
             try {
                 result = JSON.parse(candidate);
-                callback(null, [result, firstOpen, firstClose + 1]);
+                callback(null, result, firstOpen, firstClose + 1);
             } catch (e) {
                 // Do nothing
             }
