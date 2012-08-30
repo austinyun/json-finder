@@ -1,5 +1,5 @@
 // Based on ThiefMaster's code from StackOverflow
-// http://stackoverflow.com/a/10574546/843854
+// http://stackoverflow.com/a/10574546/298479
 // @return: error, the JSON object, start index, end index
 
 module.exports = function(input, callback) {
