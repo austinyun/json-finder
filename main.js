@@ -21,8 +21,13 @@ module.exports = function(input, callback) {
             candidate = str.substring(firstOpen, firstClose + 1);
 
             try {
+                // Have to put the return in otherwise it will callback
+                // multiple times for every valid object it finds, including
+                // {}, which I don't want.
+                // TODO: make result an array of valid JSON objects and return
+                //       result at the end?
                 result = JSON.parse(candidate);
-                callback(null, result, firstOpen, firstClose + 1);
+                return callback(null, result, firstOpen, firstClose + 1);
             } catch (e) {
                 // Do nothing
             }
