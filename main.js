@@ -1,7 +1,7 @@
 // Based on ThiefMaster's code from StackOverflow
 // http://stackoverflow.com/a/10574546/843854
 
-module.exports = function extractJSON(input, callback) {
+module.exports = function(input, callback) {
     var firstOpen, firstClose, candidate, result,
         str = input.toString().trim(),
         error = new Error("No JSON object found");
