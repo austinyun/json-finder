@@ -49,3 +49,8 @@ json-finder(string, function(err, result, startIndex, endIndex) {
     }
 }
 ```
+
+TODO
+----
+
+* Add tests
