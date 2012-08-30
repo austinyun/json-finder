@@ -27,16 +27,16 @@ brace as the fourth param.
 ```
 callback(err, result, startIndex, endIndex)
 
-err: null if parse was successful
-result: the parsed JSON object
+err:        null if parse was successful
+result:     the parsed JSON object
 startIndex: index of the opening brace '{'
-endIndex: index of the closing brace '}'
+endIndex:   index of the closing brace '}'
 ```
 
 Usage
 -----
 
-```
+```javascript
 var json-finder = require("json-finder");
 
 json-finder(string, function(err, result, startIndex, endIndex) {
