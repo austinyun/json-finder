@@ -43,7 +43,7 @@ json-finder(string, function(err, result, startIndex, endIndex) {
     if (err) {
         // no JSON object found
     } else {
-        console.log(Object.prototype.keys(result));
+        console.log(Object.keys(result));
         // Print only the part after the JSON object
         console.log(string.slice(endIndex))
     }
