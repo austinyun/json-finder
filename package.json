@@ -1,6 +1,6 @@
 {
-    "name": "scrapeJSON",
-    "description": "A tool to scrape JSON from the beginning of a text file.",
+    "name": "json-finder",
+    "description": "A tool to scrape JSON from a string.",
     "tags": [
         "JSON"
         ],
@@ -9,11 +9,11 @@
     "license": "ISC (http://www.isc.org/software/license)",
     "repository": {
         "type": "git",
-        "url": "https://github.com/austinyun/scrapeJSON.git"
+        "url": "https://github.com/austinyun/json-finder.git"
     },
-    "bugs": "http://github.com/austinyun/scrapeJSON/issues",
+    "bugs": "http://github.com/austinyun/json-finder/issues",
     "main": "./main.js",
-    "contributers": [{
+    "contributors": [{
         "name": "ThiefMaster",
         "email": "adrian@planetcoding.net"
     }]
