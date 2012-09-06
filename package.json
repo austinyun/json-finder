@@ -4,11 +4,7 @@
     "tags": [
         "JSON"
         ],
-<<<<<<< HEAD
     "version": "0.0.3",
-=======
-    "version": "0.0.2",
->>>>>>> 751c1fbb5bf3a41cd5b1b781ed56e60ff49ea834
     "author": "Austin Yun <w.austin.yun@gmail.com>",
     "license": "ISC (http://www.isc.org/software/license)",
     "repository": {

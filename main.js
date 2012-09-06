@@ -36,22 +36,9 @@ module.exports = function(optsArg) {
 
             acc.push([candidate, open, close + 1]);
 
-<<<<<<< HEAD
             // Terminate based on the "multiple" option
             if (opts.multiple === acc.length) {
                 return cb(null, acc);
-=======
-            try {
-                // Have to put the return in otherwise it will callback
-                // multiple times for every valid object it finds, including
-                // {}, which I don't want.
-                // TODO: make result an array of valid JSON objects and return
-                //       result at the end?
-                result = JSON.parse(candidate);
-                return callback(null, result, firstOpen, firstClose + 1);
-            } catch (e) {
-                // Do nothing
->>>>>>> 751c1fbb5bf3a41cd5b1b781ed56e60ff49ea834
             }
 
             recur(str.indexOf("{", open + 1),
