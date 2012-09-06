@@ -2,7 +2,7 @@ JSON-FINDER
 ===========
 
 A small tool for finding JSON objects in strings. By default, returns the first
-JSON object found. `{"multiple"}`
+JSON object found, but can return all or an arbitrary number in an array.
 
 Options
 -------
