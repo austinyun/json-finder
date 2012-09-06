@@ -1,37 +1,54 @@
 // Based on ThiefMaster's code from StackOverflow
 // http://stackoverflow.com/a/10574546/298479
-// @return: error, the JSON object, start index, end index
+var _ = require("underscore");
 
-module.exports = function(input, callback) {
-    var firstOpen, firstClose, candidate, result,
-        str = input.toString().trim(),
-        error = new Error("No JSON object found");
+function attemptParse(open, close, str) {
+    try {
+        return JSON.parse(str.substring(open, close + 1));
+    } catch (e) {
+        return false;
+    }
+}
 
-    firstOpen = str.indexOf('{', firstOpen + 1);
+module.exports = function(optsArg) {
+    var defaultOpts = {
+        "multiple": false,
+        "error": new Error("No JSON object found")
+    }, opts = _.extend(defaultOpts, optsArg);
 
-    do {
-        firstClose = str.lastIndexOf('}');
+    function recur(open, close, str, acc, cb) {
+        var candidate;
 
-        // Terminal condition, nothing found
-        if (firstClose <= firstOpen) {
-            callback(error, input);
+        // TERMINAL CONDITIONS -----------------------------------------------
+        if ((open === -1) || (close <= open)) {
+            if (acc && acc.length === 0) { // nothing found
+                return cb(opts.error);
+            }
+            return cb(null, acc); // Finished searching
         }
 
-        do {
-            candidate = str.substring(firstOpen, firstClose + 1);
-
-            try {
-                result = JSON.parse(candidate);
-                callback(null, result, firstOpen, firstClose + 1);
-            } catch (e) {
-                // Do nothing
+        candidate = attemptParse(open, close, str);
+        if (candidate) {
+            // With default options we're done here.
+            if (opts.multiple === false) {
+                return cb(null, candidate, open, close + 1);
             }
 
-            firstClose = str.substr(0, firstClose).lastIndexOf('}');
-        } while (firstClose > firstOpen);
+            acc.push([candidate, open, close + 1]);
 
-        // If you get to this point, it means the first '{' is not part
-        // of a JSON object, so move to the next occurence of '{'
-        firstOpen = str.indexOf('{', firstOpen + 1);
-    } while (firstOpen !== -1);
+            // Terminate based on the "multiple" option
+            if (opts.multiple === acc.length) {
+                return cb(null, acc);
+            }
+
+            recur(str.indexOf("{", open + 1),
+                    str.lastIndexOf("}"), str, acc, cb);
+        } else {
+            recur(open, str.substr(0, close).lastIndexOf("}"), str, acc, cb);
+        }
+    }
+
+    return function(str, callback) {
+        recur(str.indexOf("{"), str.lastIndexOf("}"), str, [], callback);
+    };
 };
